@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:19:21 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/12 21:14:34 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/12 21:23:48 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int encode_rgba_mand(t_info info)
 {
 	t_rgb	rgb;
-	double	factor;
-	
-	factor = (double)info.iteration / info.maxiters;
+
 	rgb.a = 255;
-	rgb.r = 255 * factor * info.iteration * 0.2;
-	rgb.g = 255 * factor * info.iteration * 0.5;
-	rgb.b = 255 * factor * info.iteration * 2;
+	rgb.r = 0;
+	rgb.g = 2 * info.iteration;
+	rgb.b = 3 * info.iteration;
 	return (rgb.r << 24 | rgb.g << 16 | rgb.b << 8 | rgb.a);
 }
 
