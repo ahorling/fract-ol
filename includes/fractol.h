@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:52:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/10 20:14:14 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/12 19:42:58 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct	s_info
 	double 		zoom;
 	mlx_image_t	*image;
 	t_plane		plane;
+	t_comp		mousepos;
 }	t_info;
 
 void	mandelbrot(t_info *info, t_comp relpoint, t_comp z);
@@ -93,6 +94,7 @@ void	colour_pixel(t_info *info, t_comp pixel);
 int		encode_rgba(t_info info);
 void	apply_zoom(t_info *info);
 void	setup(t_info *info, char *fractal, char *x, char *y);
+void	julia(t_info *info, t_comp z);
 
 
 #endif

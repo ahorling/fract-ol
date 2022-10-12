@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 19:34:16 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/10 21:02:49 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/12 20:05:30 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	mandelbrot(t_info *info, t_comp relpoint, t_comp z)
 
 	bound = sqrt((z.x * z.x) + (z.y * z.y));
 	temp = 0;
-	while (info->iteration < info->maxiters && bound < 4)
+	while (info->iteration < info->maxiters && bound < 2)
 	{
 		temp = z.x;
 		z.x = (z.x * z.x) - (z.y * z.y) + relpoint.x;

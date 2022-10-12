@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/10 21:07:48 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/12 20:31:25 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	setup(t_info *info, char *fractal, char *x, char *y)
 	info->width = ft_atoi(x);
 	info->height = ft_atoi(y);
 	info->zoom = 1;
-	info->maxiters = 200;
+	info->maxiters = 500;
+	info->mousepos = (t_comp) {.x = -0.79, .y = 0.15};
 
 	if (ft_strcmp(fractal, "Mandelbrot") == 0)
 		info->type = MANDELBROT;
