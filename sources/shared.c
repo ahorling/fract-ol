@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 19:36:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/12 19:50:02 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/14 20:56:59 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	draw_fractal(t_info *info, t_comp relpoint, t_comp pixel)
 		mandelbrot(info, relpoint, z);
 	if (info->type == JULIA)
 		julia(info, z);
-	if (info->type == SOMETHING)
-	;
+	if (info->type == SHIP)
+		ship(info, relpoint, z);
 	colour_pixel(info, pixel);
 }
 
@@ -63,9 +63,6 @@ void	start(t_info *info)
 
 	pixel.x = 0;
 	pixel.y = 0;
-	if (info->image != NULL)
-		mlx_delete_image(info->mlx, info->image);
-	info->image = mlx_new_image(info->mlx, info->width, info->height);
 	apply_zoom(info);
 	while (pixel.y < info->height)
 	{

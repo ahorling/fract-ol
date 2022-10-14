@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:52:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/12 19:42:58 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/14 21:03:44 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-enum	e_type{MANDELBROT, JULIA, SOMETHING};
+enum	e_type{MANDELBROT, JULIA, SHIP};
 
 /*
 	struct for storing complex numbers.
@@ -82,10 +82,12 @@ typedef struct	s_info
 	mlx_image_t	*image;
 	t_plane		plane;
 	t_comp		mousepos;
+	int			zoomcount;
+	t_comp		juliaconst;
 }	t_info;
 
 void	mandelbrot(t_info *info, t_comp relpoint, t_comp z);
-void	move(void *param);
+void	hooks(void *param);
 void	scroll_zoom(double xdelta, double ydelta, void* param);
 void	draw_fractal(t_info *info, t_comp relpoint, t_comp pixel);
 t_comp	relative_point(t_info info, t_comp pixel);
@@ -95,6 +97,9 @@ int		encode_rgba(t_info info);
 void	apply_zoom(t_info *info);
 void	setup(t_info *info, char *fractal, char *x, char *y);
 void	julia(t_info *info, t_comp z);
-
+void	zoom_out(t_info *info);
+void	zoom_in(t_info *info);
+void	reset_view(t_info *info);
+void	ship(t_info *info, t_comp relpoint, t_comp z);
 
 #endif

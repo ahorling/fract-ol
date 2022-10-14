@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/12 20:31:25 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/14 20:56:21 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	parser(int arguments, char *argv[])
 	}
 	if (ft_strcmp(argv[1], "Mandelbrot") != 0
 		&& ft_strcmp(argv[1], "Julia") != 0
-		&& ft_strcmp(argv[1], "Something") != 0)
+		&& ft_strcmp(argv[1], "Ship") != 0)
 	{
 		ft_printf("Invalid fractal type. Please choose between:");
-		ft_printf("'Mandelbrot', 'Julia', or 'Something'\n");
+		ft_printf("'Mandelbrot', 'Julia', or 'Ship'\n");
 		return (1);
 	}
 	if (ft_atoi(argv[2]) > 1980 || ft_atoi(argv[2]) < 100)
@@ -47,20 +47,22 @@ void	setup(t_info *info, char *fractal, char *x, char *y)
 
 	info->width = ft_atoi(x);
 	info->height = ft_atoi(y);
-	info->zoom = 1;
-	info->maxiters = 500;
-	info->mousepos = (t_comp) {.x = -0.79, .y = 0.15};
+	info->plane.xmin = -2;
+	info->plane.xmax = 2;
+	info->plane.ymin = -2;
+	info->plane.ymax = 2;
 
+	reset_view(info);
 	if (ft_strcmp(fractal, "Mandelbrot") == 0)
 		info->type = MANDELBROT;
 	else if (ft_strcmp(fractal, "Julia") == 0)
 		info->type = JULIA;
-	else if (ft_strcmp(fractal, "Something") == 0)
-		info->type = SOMETHING;
+	else if (ft_strcmp(fractal, "Ship") == 0)
+		info->type = SHIP;
 	info->mlx = mlx_init(info->width, info->height, fractal, false);
 	if (!info->mlx)
 		ft_printf("Initialization of mlx failed)");
-	info->image = NULL;
+	info->image = mlx_new_image(info->mlx, info->width, info->height);;
 }
 
 int	main(int argc, char *argv[])
@@ -76,7 +78,7 @@ int	main(int argc, char *argv[])
 	start(&info);
 	ft_printf("start complete \n");
 	mlx_scroll_hook(info.mlx, &scroll_zoom, &info);
-	mlx_loop_hook(info.mlx, &move, &info);
+	mlx_loop_hook(info.mlx, &hooks, &info);
 	mlx_loop(info.mlx);
 	mlx_delete_image(info.mlx, info.image);
 	mlx_terminate(info.mlx);

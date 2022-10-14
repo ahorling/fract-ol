@@ -6,54 +6,99 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 15:48:44 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/10 21:07:07 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/14 21:16:33 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fractol.h"
 
-void	move(void *param)
+void	reset_view(t_info *info)
 {
-	t_info *info;
+	info->plane.xmin = -2;
+	info->plane.xmax = 2;
+	info->plane.ymin = -2;
+	info->plane.ymax = 2;
+	info->iteration = 0;
+	info->zoom = 1;
+	info->zoomcount = 1;
+	info->maxiters = 100;
+	info->juliaconst = (t_comp){.x = -1.476, .y = 0};
+}
+
+void	shift_view(t_info *info)
+{
+	if (mlx_is_key_down(info->mlx, MLX_KEY_UP))
+	{
+		info->plane.ymin -= 0.1 / info->zoomcount;
+		info->plane.ymax -= 0.1 / info->zoomcount;
+		info->zoom = 1;
+	}
+	if (mlx_is_key_down(info->mlx, MLX_KEY_DOWN))
+	{
+		info->plane.ymin += 0.1 / info->zoomcount;
+		info->plane.ymax += 0.1 / info->zoomcount;
+		info->zoom = 1;
+	}
+	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
+	{
+		info->plane.xmin -= 0.1 / info->zoomcount;
+		info->plane.xmax -= 0.1 / info->zoomcount;
+		info->zoom = 1;
+	}
+	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
+	{
+		info->plane.xmin += 0.1 / info->zoomcount;
+		info->plane.xmax += 0.1 / info->zoomcount;
+		info->zoom = 1;
+	}
+	start(info);
+}
+
+void	hooks(void *param)
+{
+	t_info	*info;
+	int		a;
+	int		b;
 
 	info = param;
-	if(mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(info->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(info->mlx);
-	if(mlx_is_key_down(info->mlx, MLX_KEY_UP)) 
-		info->image->instances[0].y -= 5;
-	if(mlx_is_key_down(info->mlx, MLX_KEY_DOWN)) 
-		info->image->instances[0].y += 5;
-	if(mlx_is_key_down(info->mlx, MLX_KEY_LEFT)) 
-		info->image->instances[0].x -= 5;
-	if(mlx_is_key_down(info->mlx, MLX_KEY_RIGHT)) 
-		info->image->instances[0].x += 5;
-	if(mlx_is_key_down(info->mlx, MLX_KEY_HOME))
+	if (mlx_is_key_down(info->mlx, MLX_KEY_UP)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_DOWN)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_LEFT)
+		|| mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
+		shift_view(info);
+	if (mlx_is_key_down(info->mlx, MLX_KEY_HOME))
 	{
-		info->plane.xmin = -2;
-		info->plane.xmax = 1.5;
-		info->plane.ymin = -1.5;
-		info->plane.ymax = 1.5;
-		info->iteration = 0;
-		info->zoom = 1;
+		reset_view(info);
+		start(info);
+	}
+	if (mlx_is_mouse_down(info->mlx, MLX_MOUSE_BUTTON_LEFT)
+		&& info->type == JULIA)
+	{
+		mlx_get_mouse_pos(info->mlx, &a, &b);
+		info->juliaconst = (t_comp){.x = a, .y = b};
+		info->juliaconst = relative_point(*info, info->juliaconst);
+		start(info);
 	}
 }
 
 void	scroll_zoom(double xdelta, double ydelta, void *param)
 {
-	t_info *info;
+	t_info	*info;
+	int		x;
+	int		y;
 
+	x = 0;
+	y = 0;
 	info = param;
-	
+	mlx_get_mouse_pos(info->mlx, &x, &y);
+	info->mousepos.x = x;
+	info->mousepos.y = y;
+	info->mousepos = relative_point(*info, info->mousepos);
 	if (ydelta > 0)
-	{
-		info->zoom += 0.05;
-		info->maxiters += 5;
-	}
+		zoom_out(info);
 	else if (ydelta < 0)
-	{
-		info->zoom -=0.05;
-		info->maxiters -= 5;
-	}
+		zoom_in(info);
 	start(info);
 }
-

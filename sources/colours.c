@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:19:21 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/12 21:27:06 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/14 21:15:49 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,25 @@ int encode_rgba_mand(t_info info)
 	return (rgb.r << 24 | rgb.g << 16 | rgb.b << 8 | rgb.a);
 }
 
-int encode_rgba_julia(t_info info, t_comp pixel)
+int encode_rgba_julia(t_info info)
 {
 	t_rgb	rgb;
 
 	rgb.a = 255;
-	rgb.r = info.iteration * 3;
-	rgb.g = info.iteration * 2;
-	rgb.b = info.iteration * 0.5;
+	rgb.r = info.iteration * 10;
+	rgb.g = info.iteration * 5;
+	rgb.b = info.iteration * 1;
+	return (rgb.r << 24 | rgb.g << 16 | rgb.b << 8 | rgb.a);
+}
+
+int	encode_rgba_ship(t_info info)
+{
+	t_rgb	rgb;
+
+	rgb.a = 255;
+	rgb.r = info.iteration * 15;
+	rgb.g = info.iteration;
+	rgb.b = info.iteration * 6;
 	return (rgb.r << 24 | rgb.g << 16 | rgb.b << 8 | rgb.a);
 }
 
@@ -41,5 +52,7 @@ void	colour_pixel(t_info *info, t_comp pixel)
 	else if (info->iteration <= info->maxiters && info->type == MANDELBROT)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_mand(*info));
 	else if (info->iteration <= info->maxiters && info->type == JULIA)
-		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_julia(*info, pixel));
+		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_julia(*info));
+else if (info->iteration <= info->maxiters && info->type == SHIP)
+		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_ship(*info));
 }

@@ -6,7 +6,7 @@
 #    By: ahorling <ahorling@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/07/20 16:42:04 by ahorling      #+#    #+#                  #
-#    Updated: 2022/10/10 18:57:15 by ahorling      ########   odam.nl          #
+#    Updated: 2022/10/14 21:04:25 by ahorling      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ CFLAGS := -Wall -Wextra -Werror
 SOURCES 	:=	main.c\
 				Mandelbrot.c\
 				Julia.c\
+				Ship.c\
 				hooks.c\
 				shared.c\
 				colours.c\
@@ -68,7 +69,10 @@ $(NAME): $(OBJECTS)
 
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) -c -o $@ $<
+	@$(CC) -c -o $@ $< -O3
+
+run:
+	make && ./$(NAME)
 
 clean:
 	@rm -f $(OBJECTS)
