@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/12 19:00:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/14 18:36:31 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:01:59 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	julia(t_info *info, t_comp z)
 {
-	double bound;
-	double temp;
+	long double bound;
+	long double temp;
 
 	bound = sqrt((z.x * z.x) + (z.y * z.y));
 	temp = 0;

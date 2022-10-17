@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/14 20:56:21 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:17:54 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ void	setup(t_info *info, char *fractal, char *x, char *y)
 
 	info->width = ft_atoi(x);
 	info->height = ft_atoi(y);
-	info->plane.xmin = -2;
-	info->plane.xmax = 2;
-	info->plane.ymin = -2;
-	info->plane.ymax = 2;
 
 	reset_view(info);
 	if (ft_strcmp(fractal, "Mandelbrot") == 0)
@@ -72,11 +68,9 @@ int	main(int argc, char *argv[])
 	if (parser(argc, argv) > 0)
 		return (0);
 	setup(&info, argv[1], argv[2], argv[3]);
-	ft_printf("setup complete \n");
 	if (!info.mlx)
 		return (0);
 	start(&info);
-	ft_printf("start complete \n");
 	mlx_scroll_hook(info.mlx, &scroll_zoom, &info);
 	mlx_loop_hook(info.mlx, &hooks, &info);
 	mlx_loop(info.mlx);

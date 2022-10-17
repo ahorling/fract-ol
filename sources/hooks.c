@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 15:48:44 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/14 21:16:33 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 01:43:08 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	reset_view(t_info *info)
 	info->iteration = 0;
 	info->zoom = 1;
 	info->zoomcount = 1;
-	info->maxiters = 100;
+	info->maxiters = 200;
+	info->mousepos = (t_comp) {.x = 0.0, .y = 0.0};
 	info->juliaconst = (t_comp){.x = -1.476, .y = 0};
 }
 
@@ -35,20 +36,20 @@ void	shift_view(t_info *info)
 	}
 	if (mlx_is_key_down(info->mlx, MLX_KEY_DOWN))
 	{
-		info->plane.ymin += 0.1 / info->zoomcount;
-		info->plane.ymax += 0.1 / info->zoomcount;
+		info->plane.ymin += 0.05 / info->zoomcount;
+		info->plane.ymax += 0.05 / info->zoomcount;
 		info->zoom = 1;
 	}
 	if (mlx_is_key_down(info->mlx, MLX_KEY_LEFT))
 	{
-		info->plane.xmin -= 0.1 / info->zoomcount;
-		info->plane.xmax -= 0.1 / info->zoomcount;
+		info->plane.xmin -= 0.05 / info->zoomcount;
+		info->plane.xmax -= 0.05 / info->zoomcount;
 		info->zoom = 1;
 	}
 	if (mlx_is_key_down(info->mlx, MLX_KEY_RIGHT))
 	{
-		info->plane.xmin += 0.1 / info->zoomcount;
-		info->plane.xmax += 0.1 / info->zoomcount;
+		info->plane.xmin += 0.05 / info->zoomcount;
+		info->plane.xmax += 0.05 / info->zoomcount;
 		info->zoom = 1;
 	}
 	start(info);
@@ -95,7 +96,7 @@ void	scroll_zoom(double xdelta, double ydelta, void *param)
 	mlx_get_mouse_pos(info->mlx, &x, &y);
 	info->mousepos.x = x;
 	info->mousepos.y = y;
-	info->mousepos = relative_point(*info, info->mousepos);
+		info->mousepos = relative_point(*info, info->mousepos);
 	if (ydelta > 0)
 		zoom_out(info);
 	else if (ydelta < 0)

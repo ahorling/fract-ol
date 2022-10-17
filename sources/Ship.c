@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/14 20:57:18 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/14 21:15:00 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:02:08 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ship(t_info *info, t_comp relpoint, t_comp z)
 {
-	double	bound;
-	double	temp;
+	long double	bound;
+	long double	temp;
 
 	bound = sqrt((z.x * z.x) + (z.y * z.y));
 	temp = 0;
@@ -23,7 +23,7 @@ void	ship(t_info *info, t_comp relpoint, t_comp z)
 	{
 		temp = z.x;
 		z.x = (z.x * z.x) - (z.y * z.y) + relpoint.x;
-		z.y = 2.0 * fabs(z.y * temp) + relpoint.y;
+		z.y = 2.0 * fabsl(z.y * temp) + relpoint.y;
 		bound = sqrt((z.x * z.x) + (z.y * z.y));
 		info->iteration++;
 	}

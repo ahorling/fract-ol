@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 19:36:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/14 20:56:59 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:06:36 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_comp	relative_point(t_info info, t_comp pixel)
 	pixel.x = pixel.x * ((info.plane.xmax - info.plane.xmin) / info.width);
 	relpoint.x = pixel.x + info.plane.xmin;
 	pixel.y = pixel.y * ((info.plane.ymax - info.plane.ymin) / info.height);
-	relpoint.y = pixel.y + info.plane.ymin;
+	relpoint.y = (pixel.y + info.plane.ymin);
 	return(relpoint);
 }
 
@@ -63,6 +63,11 @@ void	start(t_info *info)
 
 	pixel.x = 0;
 	pixel.y = 0;
+	if (info->zoomcount >= 250)
+	{
+		ft_printf("stopping you there\n");
+		return;
+	}
 	apply_zoom(info);
 	while (pixel.y < info->height)
 	{
