@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:52:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:27:58 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:37:02 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-enum	e_type{mandelbrot, julia, ship};
+enum	e_type{mandel, jul, burningship};
 
 // struct for storing complex numbers.
 // x = the real number

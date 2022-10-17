@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:28:49 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:37:22 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	setup(t_info *info, char *fractal, char *x, char *y)
 	info->height = ft_atoi(y);
 	reset_view(info);
 	if (ft_strcmp(fractal, "Mandelbrot") == 0)
-		info->type = mandelbrot;
+		info->type = mandel;
 	else if (ft_strcmp(fractal, "Julia") == 0)
-		info->type = julia;
+		info->type = jul;
 	else if (ft_strcmp(fractal, "Ship") == 0)
-		info->type = ship;
+		info->type = burningship;
 	info->mlx = mlx_init(info->width, info->height, fractal, false);
 	if (!info->mlx)
 		ft_printf("Initialization of mlx failed)");

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 19:36:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:32:14 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:37:36 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	draw_fractal(t_info *info, t_comp relpoint, t_comp pixel)
 	t_comp	z;
 
 	z = relpoint;
-	if (info->type == mandelbrot)
+	if (info->type == mandel)
 		mandelbrot(info, relpoint, z);
-	if (info->type == julia)
+	if (info->type == jul)
 		julia(info, z);
-	if (info->type == ship)
+	if (info->type == burningship)
 		ship(info, relpoint, z);
 	colour_pixel(info, pixel);
 }

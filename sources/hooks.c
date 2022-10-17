@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 15:48:44 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:30:12 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:37:55 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	hooks(void *param)
 		start(info);
 	}
 	if (mlx_is_mouse_down(info->mlx, MLX_MOUSE_BUTTON_LEFT)
-		&& info->type == JULIA)
+		&& info->type == jul)
 	{
 		mlx_get_mouse_pos(info->mlx, &a, &b);
 		info->juliaconst = (t_comp){.x = a, .y = b};

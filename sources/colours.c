@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:19:21 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:29:49 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:38:20 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	colour_pixel(t_info *info, t_comp pixel)
 {
 	if (info->iteration == info->maxiters)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, 255);
-	else if (info->iteration <= info->maxiters && info->type == MANDELBROT)
+	else if (info->iteration <= info->maxiters && info->type == mandel)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_mand(*info));
-	else if (info->iteration <= info->maxiters && info->type == JULIA)
+	else if (info->iteration <= info->maxiters && info->type == jul)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_julia(*info));
-	else if (info->iteration <= info->maxiters && info->type == SHIP)
+	else if (info->iteration <= info->maxiters && info->type == burningship)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_ship(*info));
 }
