@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 18:56:08 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:33:37 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 10:05:36 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	zoom_out(t_info *info)
 {
 	info->zoom = 1;
 	if (info->zoom > 0)
-		info->zoom += 0.001 * info->zoomcount;
+		info->zoom += 0.01 * info->zoomcount;
 	if (info->maxiters > 50)
 		info->maxiters -= 2;
 	if (info->zoomcount > 1)
@@ -44,7 +44,7 @@ void	zoom_in(t_info *info)
 	else
 		ft_printf("zoom count: %d\n", info->zoomcount);
 	info->zoom = 1;
-	info->zoom -= 0.001 * info->zoomcount;
+	info->zoom -= 0.01 * info->zoomcount;
 	info->maxiters += 2;
 	info->zoomcount += 1;
 }
