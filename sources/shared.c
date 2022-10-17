@@ -6,16 +6,11 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 19:36:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:06:36 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:32:14 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fractol.h"
-
-/*
-	relative_pixel sets the current pixel to the relative point
-	located on the cartesian plane that the fractal occupies.
-*/
 
 t_comp	relative_point(t_info info, t_comp pixel)
 {
@@ -25,48 +20,34 @@ t_comp	relative_point(t_info info, t_comp pixel)
 	relpoint.x = pixel.x + info.plane.xmin;
 	pixel.y = pixel.y * ((info.plane.ymax - info.plane.ymin) / info.height);
 	relpoint.y = (pixel.y + info.plane.ymin);
-	return(relpoint);
+	return (relpoint);
 }
-
-/*
-	draw_fractal takes the struct and the relative point on the cartesian plane, creates a
-	complex number Z that will be used by the function to store results, and then paints the pixel
-	depending on the result
-*/
 
 void	draw_fractal(t_info *info, t_comp relpoint, t_comp pixel)
 {
 	t_comp	z;
 
 	z = relpoint;
-	if (info->type == MANDELBROT)
+	if (info->type == mandelbrot)
 		mandelbrot(info, relpoint, z);
-	if (info->type == JULIA)
+	if (info->type == julia)
 		julia(info, z);
-	if (info->type == SHIP)
+	if (info->type == ship)
 		ship(info, relpoint, z);
 	colour_pixel(info, pixel);
 }
 
-/*
-	checks which fractal is to be printed, and begins the printing process by 
-	first setting the size of the cartesian plane the fractal is to be printed on.
-	then it begins moving through the image. for every pixel it finds the realtive
-	point on the plane, then calls a function to print the pixel
-	depending on which fractal is called and the location of the point on the plane.
-*/
-
 void	start(t_info *info)
 {
-	t_comp pixel;
-	t_comp relpoint;
+	t_comp	pixel;
+	t_comp	relpoint;
 
 	pixel.x = 0;
 	pixel.y = 0;
 	if (info->zoomcount >= 250)
 	{
 		ft_printf("stopping you there\n");
-		return;
+		return ;
 	}
 	apply_zoom(info);
 	while (pixel.y < info->height)

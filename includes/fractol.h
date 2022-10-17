@@ -6,39 +6,35 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:52:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:14:57 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:27:58 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL
-# define FRACTOL
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
-#include "libraries/MLX42/include/MLX42/MLX42.h"
-#include "libraries/libft/includes/libft.h"
-#include <math.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+# include "libraries/MLX42/include/MLX42/MLX42.h"
+# include "libraries/libft/includes/libft.h"
+# include <math.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 
-enum	e_type{MANDELBROT, JULIA, SHIP};
-
+enum	e_type{mandelbrot, julia, ship};
 
 // struct for storing complex numbers.
 // x = the real number
 // y = the imaginary number
 
-
-typedef struct	s_comp
+typedef struct s_comp
 {
 	long double	x;
 	long double	y;
 }	t_comp;
 
-
 //	struct for storing cartesian plane info.
 
-
-typedef	struct	s_plane
+typedef struct s_plane
 {
 	long double	xmin;
 	long double	xmax;
@@ -46,18 +42,15 @@ typedef	struct	s_plane
 	long double	ymax;
 }	t_plane;
 
-
 // struct for storing rgb colour values
 
-
-typedef	struct	s_rgb
+typedef struct s_rgb
 {
 	int	r;
 	int	g;
 	int	b;
 	int	a;
 }	t_rgb;
-
 
 // e_type = which fractal
 // width = window x value
@@ -71,8 +64,7 @@ typedef	struct	s_rgb
 // mousepos = position of mouse cursor
 // juliaconst = the C value for the julia sets
 
-
-typedef struct	s_info
+typedef struct s_info
 {
 	enum e_type	type;
 	int			width;
@@ -81,7 +73,7 @@ typedef struct	s_info
 	int			iteration;
 	int			maxiters;
 	mlx_t		*mlx;
-	long double zoom;
+	long double	zoom;
 	int			zoomcount;
 	mlx_image_t	*image;
 	t_comp		mousepos;
@@ -95,7 +87,7 @@ void		ship(t_info *info, t_comp relpoint, t_comp z);
 
 //My hook functions
 void		hooks(void *param);
-void		scroll_zoom(double xdelta, double ydelta, void* param);
+void		scroll_zoom(double xdelta, double ydelta, void *param);
 void		shift_view(t_info *info);
 void		reset_view(t_info *info);
 
@@ -107,8 +99,8 @@ void		draw_fractal(t_info *info, t_comp relpoint, t_comp pixel);
 t_comp		relative_point(t_info info, t_comp pixel);
 
 //Colouring functions
-int 		encode_rgba_mand(t_info info);
-int 		encode_rgba_julia(t_info info);
+int			encode_rgba_mand(t_info info);
+int			encode_rgba_julia(t_info info);
 int			encode_rgba_ship(t_info info);
 void		colour_pixel(t_info *info, t_comp pixel);
 

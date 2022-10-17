@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:17:54 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:28:49 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,19 @@ int	parser(int arguments, char *argv[])
 
 void	setup(t_info *info, char *fractal, char *x, char *y)
 {
-
 	info->width = ft_atoi(x);
 	info->height = ft_atoi(y);
-
 	reset_view(info);
 	if (ft_strcmp(fractal, "Mandelbrot") == 0)
-		info->type = MANDELBROT;
+		info->type = mandelbrot;
 	else if (ft_strcmp(fractal, "Julia") == 0)
-		info->type = JULIA;
+		info->type = julia;
 	else if (ft_strcmp(fractal, "Ship") == 0)
-		info->type = SHIP;
+		info->type = ship;
 	info->mlx = mlx_init(info->width, info->height, fractal, false);
 	if (!info->mlx)
 		ft_printf("Initialization of mlx failed)");
-	info->image = mlx_new_image(info->mlx, info->width, info->height);;
+	info->image = mlx_new_image(info->mlx, info->width, info->height);
 }
 
 int	main(int argc, char *argv[])

@@ -6,13 +6,13 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 15:19:21 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 01:20:45 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:29:49 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fractol.h"
 
-int encode_rgba_mand(t_info info)
+int	encode_rgba_mand(t_info info)
 {
 	t_rgb	rgb;
 
@@ -23,7 +23,7 @@ int encode_rgba_mand(t_info info)
 	return (rgb.r << 24 | rgb.g << 16 | rgb.b << 8 | rgb.a);
 }
 
-int encode_rgba_julia(t_info info)
+int	encode_rgba_julia(t_info info)
 {
 	t_rgb	rgb;
 
@@ -53,6 +53,6 @@ void	colour_pixel(t_info *info, t_comp pixel)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_mand(*info));
 	else if (info->iteration <= info->maxiters && info->type == JULIA)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_julia(*info));
-else if (info->iteration <= info->maxiters && info->type == SHIP)
+	else if (info->iteration <= info->maxiters && info->type == SHIP)
 		mlx_put_pixel(info->image, pixel.x, pixel.y, encode_rgba_ship(*info));
 }

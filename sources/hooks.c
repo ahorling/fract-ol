@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/21 15:48:44 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 01:43:08 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/17 02:30:12 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	reset_view(t_info *info)
 	info->zoom = 1;
 	info->zoomcount = 1;
 	info->maxiters = 200;
-	info->mousepos = (t_comp) {.x = 0.0, .y = 0.0};
+	info->mousepos = (t_comp){.x = 0.0, .y = 0.0};
 	info->juliaconst = (t_comp){.x = -1.476, .y = 0};
 }
 
