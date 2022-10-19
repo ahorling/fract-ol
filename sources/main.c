@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/19 16:26:13 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/19 16:53:35 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	julia_parse(t_info *info, int arguments, char *argv[])
 
 int	parser(t_info *info, int arguments, char *argv[])
 {
-	if (ft_strcmp(argv[1], "Julia") == 0)
+	if (arguments > 1 && ft_strcmp(argv[1], "Julia") == 0)
 		return (julia_parse(info, arguments, argv));
 	if (arguments != 4 && arguments != 2 && arguments != 6)
 	{
