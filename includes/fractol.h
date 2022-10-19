@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:52:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/19 15:37:52 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/19 17:16:55 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "libraries/MLX42/include/MLX42/MLX42.h"
 # include "libraries/libft/includes/libft.h"
 # include <math.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
 
 enum	e_type{mandel, jul, burningship};
 
