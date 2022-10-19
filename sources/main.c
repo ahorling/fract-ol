@@ -6,17 +6,45 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:34:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 10:05:08 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/19 16:26:13 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fractol.h"
 
-/* A simple parser to check arguments and proper values. */
-
-int	parser(int arguments, char *argv[])
+int	julia_parse(t_info *info, int arguments, char *argv[])
 {
-	if (arguments != 4 && arguments != 2)
+	t_comp	julia_c;
+
+	if (arguments == 2 || arguments == 4)
+		info->juliaconst = (t_comp){.x = -1.476, .y = 0};
+	else if (arguments == 6)
+	{
+		info->width = ft_atoi(argv[2]);
+		info->height = ft_atoi(argv[3]);
+		info->plane = (t_plane){.xmin = -2, .xmax = 2, .ymin = -2, .ymax = 2};
+		if (ft_atoi(argv[4]) < 0 || ft_atoi(argv[4]) > info->width)
+			return (ft_printf("optional julia pixel must be in window.\n"));
+		if (ft_atoi(argv[5]) < 0 || ft_atoi(argv[5]) > info->height)
+			return (ft_printf("optional julia pixel must be in window.\n"));
+		julia_c = (t_comp){.x = ft_atoi(argv[4]), .y = ft_atoi(argv[5])};
+		info->juliaconst = relative_point(*info, julia_c);
+	}
+	else
+	{
+		ft_printf("Invalid Julia input. please configure your input as:");
+		ft_printf("./fractol Julia [pixel coord 1] [pixel coord 2]");
+		ft_printf("{x between 1980 and 100} {y between 1980 and 100}\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	parser(t_info *info, int arguments, char *argv[])
+{
+	if (ft_strcmp(argv[1], "Julia") == 0)
+		return (julia_parse(info, arguments, argv));
+	if (arguments != 4 && arguments != 2 && arguments != 6)
 	{
 		ft_printf("Invalid input. Please configure your input as:");
 		ft_printf("./fractol [fractal type] [x resolution] [y resolution]\n");
@@ -66,7 +94,7 @@ int	main(int argc, char *argv[])
 {
 	t_info		info;
 
-	if (parser(argc, argv) > 0)
+	if (parser(&info, argc, argv) > 0)
 		return (0);
 	if (argc == 2)
 		setup(&info, argv[1], "700", "700");

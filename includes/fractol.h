@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 14:52:07 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:37:02 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/19 15:37:52 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void		shift_view(t_info *info);
 void		reset_view(t_info *info);
 
 //Main functions shared across all fractals
-int			parser(int arguments, char *argv[]);
+int			parser(t_info *info, int arguments, char *argv[]);
+int			julia_parse(t_info *info, int arguments, char *argv[]);
 void		setup(t_info *info, char *fractal, char *x, char *y);
 void		start(t_info *info);
 void		draw_fractal(t_info *info, t_comp relpoint, t_comp pixel);
