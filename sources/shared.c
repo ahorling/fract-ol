@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 19:36:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 02:37:36 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/19 17:02:57 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	start(t_info *info)
 
 	pixel.x = 0;
 	pixel.y = 0;
-	if (info->zoomcount >= 250)
+	if (info->zoomcount >= 112)
 	{
 		ft_printf("stopping you there\n");
 		return ;

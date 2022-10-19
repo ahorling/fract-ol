@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 18:56:08 by ahorling      #+#    #+#                 */
-/*   Updated: 2022/10/17 10:05:36 by ahorling      ########   odam.nl         */
+/*   Updated: 2022/10/19 17:04:16 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	zoom_out(t_info *info)
 {
 	info->zoom = 1;
 	if (info->zoom > 0)
-		info->zoom += 0.01 * info->zoomcount;
+		info->zoom += 0.005 * info->zoomcount;
 	if (info->maxiters > 50)
-		info->maxiters -= 2;
+		info->maxiters -= 4;
 	if (info->zoomcount > 1)
 		info->zoomcount -= 1;
 	ft_printf("zoom count: %d\n", info->zoomcount);
@@ -39,12 +39,12 @@ void	zoom_out(t_info *info)
 
 void	zoom_in(t_info *info)
 {
-	if (info->zoomcount >= 230)
+	if (info->zoomcount >= 100)
 		ft_printf("reaching long doubles limit.\n");
 	else
 		ft_printf("zoom count: %d\n", info->zoomcount);
 	info->zoom = 1;
-	info->zoom -= 0.01 * info->zoomcount;
-	info->maxiters += 2;
+	info->zoom -= 0.005 * info->zoomcount;
+	info->maxiters += 4;
 	info->zoomcount += 1;
 }
